@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const PdfComponent = ({ pdfSingleData }) => {
-  
   return (
     <div className="container">
       {pdfSingleData?.length === 0 ? (

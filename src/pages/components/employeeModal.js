@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { use, useEffect, useState } from "react";
 
 import toast, { Toaster } from "react-hot-toast";
@@ -70,7 +69,7 @@ const EmployeeModal = ({
       const dataRank = await resRank.json();
 
       balance.total_amount = total_bank_balance - total;
-      
+
       const requestOptionsBalance = {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
@@ -81,7 +80,7 @@ const EmployeeModal = ({
         requestOptionsBalance
       );
       const dataBalance = await resBalance.json();
-      console.log(resBalance,dataBalance);
+
       setEmModal(false);
     }
   };

@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
 import { AiOutlineEdit } from "react-icons/ai";
 import { AiOutlineDelete } from "react-icons/ai";
@@ -26,19 +25,8 @@ const Info = ({ inputs, total_bank_balance }) => {
     const dataAccount = await resAccount.json();
     setAccountData(dataAccount);
   };
-  // useEffect(() => {
-  //   const fetchData = async (temp) => {
-  //     const res = await fetch(`http://localhost:3001/api/getOnen/${temp}`);
-  //     const data = await res.json();
-  //     console.log(data);
-  //     generatePDF(data);
-  //     // setPdfSingleData(data);
-  //   };
-  //   fetchData(temp);
-  // }, []);
 
   const pdfData = async (id) => {
-    
     const res = await fetch(`http://localhost:3001/api/getOne/${id}`);
     const data = await res.json();
 
@@ -46,8 +34,8 @@ const Info = ({ inputs, total_bank_balance }) => {
       `http://localhost:3001/api/getSingleAccount/${id}`
     );
     const dataAccount = await resAccount.json();
-    generatePDF(data,dataAccount[dataAccount.length-1]);
-    setPdfSingleData(data)
+    generatePDF(data, dataAccount[dataAccount.length - 1]);
+    setPdfSingleData(data);
   };
   const handleDelete = async (id) => {
     const res = await fetch(`http://localhost:3001/api/delete/${id}`, {
@@ -171,7 +159,6 @@ const Info = ({ inputs, total_bank_balance }) => {
                       <AiFillFilePdf
                         onClick={() => {
                           pdfData(input.uniqueId);
-                          
                         }}
                         className="cursor-pointer"
                       />
@@ -183,7 +170,6 @@ const Info = ({ inputs, total_bank_balance }) => {
           </div>
         </div>
       </div>
-      {/* <PdfComponent pdfSingleData={pdfSingleData}/> */}
     </div>
   );
 };

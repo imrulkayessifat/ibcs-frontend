@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import Head from "next/head";
 import Info from "./components/info";
 import Modal from "./components/modal";
@@ -19,7 +18,7 @@ export default function Home({ dataPost, total_balance }) {
 
   const destroy = async () => {
     let token = "JWT " + localStorage.getItem("token");
-    console.log(token);
+
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json", Authorization: token },
@@ -37,9 +36,6 @@ export default function Home({ dataPost, total_balance }) {
     }
   }
 
-  // useEffect(()=>{
-  //   router.push("/login")
-  // },[find])
   return (
     <>
       <Head>
@@ -75,8 +71,8 @@ export default function Home({ dataPost, total_balance }) {
             </>
           ) : null}
         </div>
-        <Account total_bank_balance={total_bank_balance}/>
-        
+        <Account total_bank_balance={total_bank_balance} />
+
         <Info total_bank_balance={total_bank_balance} inputs={statePost} />
       </div>
     </>

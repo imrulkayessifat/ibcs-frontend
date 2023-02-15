@@ -1,40 +1,40 @@
 import React, { use, useEffect, useState } from "react";
 
-const EditModal = ({ setShowModal,updateData }) => {
-
+const EditModal = ({ setShowModal, updateData }) => {
   const [values, setValues] = useState({
-    name:'',
-    rank: '',
-    address: '',
-    mobile: '',
-    account: '',
+    name: "",
+    rank: "",
+    address: "",
+    mobile: "",
+    account: "",
   });
-  useEffect(()=>{
-    setValues(prevState=>({
+  useEffect(() => {
+    setValues((prevState) => ({
       ...prevState,
-      name:updateData?.name,
-      rank:updateData?.rank,
-      address:updateData?.address,
-      mobile:updateData?.mobile,
-      account:updateData?.account
-    }))
-  },[updateData])
-  console.log(values)
+      name: updateData?.name,
+      rank: updateData?.rank,
+      address: updateData?.address,
+      mobile: updateData?.mobile,
+      account: updateData?.account,
+    }));
+  }, [updateData]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(updateData?.uniqueId);
+
     const requestOptions = {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(values)
+      body: JSON.stringify(values),
     };
-    const res = await fetch(`http://localhost:3001/api/update/${updateData?.uniqueId}`,requestOptions);
+    const res = await fetch(
+      `http://localhost:3001/api/update/${updateData?.uniqueId}`,
+      requestOptions
+    );
     const data = await res.json();
-    console.log(data);
+
     setShowModal(false);
   };
-
-
 
   const onChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
@@ -104,7 +104,7 @@ const EditModal = ({ setShowModal,updateData }) => {
               <option value={5}>5</option>
               <option value={6}>6</option>
             </select>
-            
+
             <label
               htmlFor="name"
               className="text-gray-800 text-sm font-bold leading-tight tracking-normal"

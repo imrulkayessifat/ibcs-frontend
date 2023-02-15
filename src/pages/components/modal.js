@@ -1,7 +1,6 @@
 import React, { use, useEffect, useState } from "react";
 
 const Modal = ({ setShowModal }) => {
-
   const [values, setValues] = useState({
     name: "",
     rank: 0,
@@ -9,7 +8,7 @@ const Modal = ({ setShowModal }) => {
     mobile: 0,
     account: 0,
   });
-  console.log(values);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const requestOptions = {
@@ -17,14 +16,11 @@ const Modal = ({ setShowModal }) => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(values),
     };
-    const res = await fetch(`http://localhost:3001/api/post`,requestOptions);
+    const res = await fetch(`http://localhost:3001/api/post`, requestOptions);
     const data = await res.json();
-    console.log(res);
-    console.log(data);
+
     setShowModal(false);
   };
-
-
 
   const onChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
@@ -69,7 +65,6 @@ const Modal = ({ setShowModal }) => {
               className="mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border"
               placeholder="James"
               name="name"
-      
               required
               onChange={onChange}
             />
@@ -93,7 +88,7 @@ const Modal = ({ setShowModal }) => {
               <option value={5}>5</option>
               <option value={6}>6</option>
             </select>
-            
+
             <label
               htmlFor="name"
               className="text-gray-800 text-sm font-bold leading-tight tracking-normal"
@@ -104,7 +99,6 @@ const Modal = ({ setShowModal }) => {
               id="address"
               className="mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border"
               placeholder="sylhet"
-              
               name="address"
               required
               onChange={onChange}
@@ -120,7 +114,6 @@ const Modal = ({ setShowModal }) => {
               type="number"
               className="mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border"
               placeholder="01736011747"
-              
               name="mobile"
               required
               onChange={onChange}
@@ -157,7 +150,6 @@ const Modal = ({ setShowModal }) => {
                 type="number"
                 className="text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-16 text-sm border-gray-300 rounded border"
                 placeholder="XXXX - XXXX - XXXX - XXXX"
-                
                 name="account"
                 required
                 onChange={onChange}

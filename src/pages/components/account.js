@@ -4,10 +4,6 @@ const Account = ({ total_bank_balance }) => {
     total_amount: 0,
   });
 
-  // useEffect(() => {
-  //   values.total_amount = values.total_amount + total_bank_balance;
-  // }, [values]);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     values.total_amount = parseInt(values.total_amount) + total_bank_balance;
@@ -22,8 +18,6 @@ const Account = ({ total_bank_balance }) => {
       requestOptions
     );
     const data = await res.json();
-    console.log(res);
-    console.log(data);
   };
 
   const onChange = (e) => {
