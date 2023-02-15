@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-const Account = ({ total_bank_balance }) => {
+const Account = ({ total_bank_balance, setBankBalance, bankBalance }) => {
   const [values, setValues] = useState({
     total_amount: 0,
   });
@@ -18,6 +18,11 @@ const Account = ({ total_bank_balance }) => {
       requestOptions
     );
     const data = await res.json();
+
+    setBankBalance(data?.total_amount);
+    setValues({
+      total_amount: 0,
+    });
   };
 
   const onChange = (e) => {
@@ -29,7 +34,8 @@ const Account = ({ total_bank_balance }) => {
       <input
         id="total_amount"
         className="mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal h-10 flex items-center pl-3 text-sm border-gray-300 rounded border"
-        placeholder="James"
+        placeholder=""
+        value={values.total_amount}
         type="number"
         name="total_amount"
         onChange={onChange}

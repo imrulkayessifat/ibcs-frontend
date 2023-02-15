@@ -1,6 +1,6 @@
 import React, { use, useEffect, useState } from "react";
 
-const Modal = ({ setShowModal }) => {
+const Modal = ({ setShowModal,setStatePost }) => {
   const [values, setValues] = useState({
     name: "",
     rank: 0,
@@ -18,6 +18,10 @@ const Modal = ({ setShowModal }) => {
     };
     const res = await fetch(`http://localhost:3001/api/post`, requestOptions);
     const data = await res.json();
+
+    const posts1 = await fetch(`http://localhost:3001/api/getAll`);
+    const dataPost1 = await posts1.json();
+    setStatePost(dataPost1)
 
     setShowModal(false);
   };

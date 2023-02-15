@@ -7,13 +7,17 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 export default function Home({ dataPost, total_balance }) {
   const [statePost, setStatePost] = useState();
+  const [bankBalance,setBankBalance] = useState();
   const router = useRouter();
   const [find, setFind] = useState();
 
   const total_bank_balance = total_balance[0]?.total_amount;
   useEffect(() => {
     setStatePost(dataPost);
-  }, [dataPost]);
+    setBankBalance(total_balance[0]?.total_amount)
+    
+  }, [dataPost,total_balance]);
+
   const [showModal, setShowModal] = useState(false);
 
   const destroy = async () => {
@@ -49,7 +53,7 @@ export default function Home({ dataPost, total_balance }) {
         <div className="flex justify-between">
           <h1 className="text-xl">Employee Status : </h1>
           <p className="px-5 text-xl">
-            Total Bank Balance : {total_bank_balance}
+            Total Bank Balance : {bankBalance}
           </p>
           <button
             onClick={() => destroy()}
@@ -67,13 +71,13 @@ export default function Home({ dataPost, total_balance }) {
           </button>
           {showModal ? (
             <>
-              <Modal setShowModal={setShowModal} />
+              <Modal setStatePost={setStatePost} setShowModal={setShowModal} />
             </>
           ) : null}
         </div>
-        <Account total_bank_balance={total_bank_balance} />
+        <Account bankBalance={bankBalance} setBankBalance={setBankBalance} total_bank_balance={total_bank_balance} />
 
-        <Info total_bank_balance={total_bank_balance} inputs={statePost} />
+        <Info total_bank_balance={total_bank_balance} setStatePost={setStatePost} inputs={statePost} />
       </div>
     </>
   );

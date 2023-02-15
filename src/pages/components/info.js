@@ -3,18 +3,20 @@ import { AiOutlineEdit } from "react-icons/ai";
 import { AiOutlineDelete } from "react-icons/ai";
 import { AiOutlineSend } from "react-icons/ai";
 import { AiFillFilePdf } from "react-icons/ai";
-import { useEffect, useState } from "react";
+import { useEffect, useState,useCallback } from "react";
 import EditModal from "./editModal";
 import EmployeeModal from "./employeeModal";
 import generatePDF from "./reportGenerator";
 import PdfComponent from "./pdfComponent";
-const Info = ({ inputs, total_bank_balance }) => {
+const Info = ({ inputs,setStatePost, total_bank_balance }) => {
   const [updateData, setUpdateData] = useState();
   const [accountData, setAccountData] = useState();
   const [showModal, setShowModal] = useState(false);
   const [emModal, setEmModal] = useState(false);
+  const [, updateState] = useState();
 
   const [pdfSingleData, setPdfSingleData] = useState();
+  
   const singleData = async (id) => {
     const res = await fetch(`http://localhost:3001/api/getOne/${id}`);
     const data = await res.json();
@@ -37,10 +39,14 @@ const Info = ({ inputs, total_bank_balance }) => {
     generatePDF(data, dataAccount[dataAccount.length - 1]);
     setPdfSingleData(data);
   };
+  
   const handleDelete = async (id) => {
     const res = await fetch(`http://localhost:3001/api/delete/${id}`, {
       method: "DELETE",
     });
+    const posts1 = await fetch(`http://localhost:3001/api/getAll`);
+    const dataPost1 = await posts1.json();
+    setStatePost(dataPost1)
   };
 
   return (
