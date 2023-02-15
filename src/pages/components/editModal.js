@@ -1,6 +1,8 @@
 import React, { use, useEffect, useState } from "react";
 
-const EditModal = ({ setShowModal, updateData }) => {
+const EditModal = ({ setShowModal, updateData, setStatePost }) => {
+  const [editData, setEditData] = useState();
+
   const [values, setValues] = useState({
     name: "",
     rank: "",
@@ -32,13 +34,16 @@ const EditModal = ({ setShowModal, updateData }) => {
       requestOptions
     );
     const data = await res.json();
-
+    const posts1 = await fetch(`http://localhost:3001/api/getAll`);
+    const dataPost1 = await posts1.json();
+    setStatePost(dataPost1);
     setShowModal(false);
   };
 
   const onChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
+  console.log(values);
   return (
     <div
       className="py-12 bg-white backdrop-blur-3xl transition duration-150 ease-in-out z-10 absolute top-0 right-0 bottom-0 left-0"
@@ -79,7 +84,7 @@ const EditModal = ({ setShowModal, updateData }) => {
               className="mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border"
               placeholder="James"
               name="name"
-              value={values?.name}
+              value={values?.name ?? ""}
               required
               onChange={onChange}
             />
