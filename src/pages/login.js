@@ -60,12 +60,18 @@ const Login = () => {
                 action="#"
               >
                 <div>
-                  <label
-                    htmlFor="email"
-                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                  >
-                    Your Username
-                  </label>
+                  <div className="flex justify-between">
+                    <label
+                      htmlFor="email"
+                      className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                    >
+                      Your Username
+                    </label>
+                    <p className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                      Username : admin
+                    </p>
+                  </div>
+
                   <input
                     type="text"
                     name="username"
@@ -77,12 +83,17 @@ const Login = () => {
                   />
                 </div>
                 <div>
-                  <label
-                    htmlFor="password"
-                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                  >
-                    Password
-                  </label>
+                  <div className="flex justify-between">
+                    <label
+                      htmlFor="password"
+                      className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                    >
+                      Password
+                    </label>
+                    <p className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                      Password : password
+                    </p>
+                  </div>
                   <input
                     type="password"
                     name="password"

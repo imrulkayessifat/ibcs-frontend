@@ -1,25 +1,21 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
 import { AiOutlineEdit } from "react-icons/ai";
 import { AiOutlineDelete } from "react-icons/ai";
 import { AiOutlineSend } from "react-icons/ai";
 import { AiFillFilePdf } from "react-icons/ai";
-import { Worker, Viewer } from "@react-pdf-viewer/core";
-import { zoomPlugin } from "@react-pdf-viewer/zoom";
-import "@react-pdf-viewer/zoom/lib/styles/index.css";
-import "jspdf-autotable";
-import "@react-pdf-viewer/core/lib/styles/index.css";
-import { data } from "autoprefixer";
 import { useEffect, useState } from "react";
-import html2canvas from "html2canvas";
-import jsPDF from "jspdf";
 import EditModal from "./editModal";
 import EmployeeModal from "./employeeModal";
+import generatePDF from "./reportGenerator";
+import PdfComponent from "./pdfComponent";
 const Info = ({ inputs, total_bank_balance }) => {
   const [updateData, setUpdateData] = useState();
   const [accountData, setAccountData] = useState();
   const [showModal, setShowModal] = useState(false);
   const [emModal, setEmModal] = useState(false);
-  const [temp,setTemp] = useState([]);
+
+  const [pdfSingleData, setPdfSingleData] = useState();
   const singleData = async (id) => {
     const res = await fetch(`http://localhost:3001/api/getOne/${id}`);
     const data = await res.json();
@@ -30,69 +26,29 @@ const Info = ({ inputs, total_bank_balance }) => {
     const dataAccount = await resAccount.json();
     setAccountData(dataAccount);
   };
+  // useEffect(() => {
+  //   const fetchData = async (temp) => {
+  //     const res = await fetch(`http://localhost:3001/api/getOnen/${temp}`);
+  //     const data = await res.json();
+  //     console.log(data);
+  //     generatePDF(data);
+  //     // setPdfSingleData(data);
+  //   };
+  //   fetchData(temp);
+  // }, []);
 
   const pdfData = async (id) => {
+    
     const res = await fetch(`http://localhost:3001/api/getOne/${id}`);
     const data = await res.json();
-    console.log(id,data);
-    const pdf = new jsPDF("p", "pt", "a4");
-    const columns = [
-      "Id",
-      "UniqueId",
-      "name",
-      "address",
-      "mobile",
-      "account",
-      "rank",
-    ];
-    let rows = [];
-    // let temp = [
-    //   data?._id,
-    //   data?.uniqueId,
-    //   data.name,
-    //   data.address,
-    //   data.mobile,
-    //   data.account,
-    //   data.rank,
-    // ];
-    temp.push(data?.uniqueId);
-    
-    console.log(temp);
-    pdf.text(235, 40, "Tabla de Prestamo");
-    pdf.autoTable(columns, rows, {
-      startY: 65,
-      theme: "grid",
-      styles: {
-        font: "times",
-        halign: "center",
-        cellPadding: 3.5,
-        lineWidth: 0.5,
-        lineColor: [0, 0, 0],
-        textColor: [0, 0, 0],
-      },
-      headStyles: {
-        textColor: [0, 0, 0],
-        fontStyle: "normal",
-        lineWidth: 0.5,
-        lineColor: [0, 0, 0],
-        fillColor: [166, 204, 247],
-      },
-      alternateRowStyles: {
-        fillColor: [212, 212, 212],
-        textColor: [0, 0, 0],
-        lineWidth: 0.5,
-        lineColor: [0, 0, 0],
-      },
-      rowStyles: {
-        lineWidth: 0.5,
-        lineColor: [0, 0, 0],
-      },
-      tableLineColor: [0, 0, 0],
-    });
-    console.log(pdf.output("datauristring"));
-    //pdf.save("pdf");
-  };
 
+    const resAccount = await fetch(
+      `http://localhost:3001/api/getSingleAccount/${id}`
+    );
+    const dataAccount = await resAccount.json();
+    generatePDF(data,dataAccount[dataAccount.length-1]);
+    setPdfSingleData(data)
+  };
   const handleDelete = async (id) => {
     const res = await fetch(`http://localhost:3001/api/delete/${id}`, {
       method: "DELETE",
@@ -215,6 +171,7 @@ const Info = ({ inputs, total_bank_balance }) => {
                       <AiFillFilePdf
                         onClick={() => {
                           pdfData(input.uniqueId);
+                          
                         }}
                         className="cursor-pointer"
                       />
@@ -226,6 +183,7 @@ const Info = ({ inputs, total_bank_balance }) => {
           </div>
         </div>
       </div>
+      {/* <PdfComponent pdfSingleData={pdfSingleData}/> */}
     </div>
   );
 };
