@@ -20,22 +20,24 @@ const generatePDF = (temp, balance) => {
   ];
 
   const tableRows = [];
+  if (Array.isArray(temp)) {
+    temp?.forEach((ticket) => {
+      const ticketData = [
+        ticket._id,
+        ticket.uniqueId,
+        ticket.name,
+        ticket.rank,
+        ticket.address,
+        ticket.mobile,
+        ticket.account,
+        balance?.basic,
+        balance?.houserent,
+        balance?.medicalallowance,
+      ];
+      tableRows.push(ticketData);
+    });
+  }
 
-  temp?.forEach((ticket) => {
-    const ticketData = [
-      ticket._id,
-      ticket.uniqueId,
-      ticket.name,
-      ticket.rank,
-      ticket.address,
-      ticket.mobile,
-      ticket.account,
-      balance?.basic,
-      balance?.houserent,
-      balance?.medicalallowance,
-    ];
-    tableRows.push(ticketData);
-  });
 
   doc.autoTable(tableColumn, tableRows, { startY: 10 });
   const date = Date().split(" ");
