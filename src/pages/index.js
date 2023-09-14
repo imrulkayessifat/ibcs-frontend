@@ -27,7 +27,7 @@ export default function Home({ dataPost, total_balance }) {
       method: "POST",
       headers: { "Content-Type": "application/json", Authorization: token },
     };
-    const res = await fetch(`http://localhost:3001/api/logout`, requestOptions);
+    const res = await fetch(`https://payscale-backend.onrender.com/api/logout`, requestOptions);
     const data = await res.json();
     if (data?.success) {
       setFind(data?.success);
@@ -84,11 +84,11 @@ export default function Home({ dataPost, total_balance }) {
 }
 
 export async function getServerSideProps(context) {
-  const posts = await fetch(`http://localhost:3001/api/getAll`);
+  const posts = await fetch(`https://payscale-backend.onrender.com/api/getAll`);
   const dataPost = await posts.json();
 
   const balance = await fetch(
-    `http://localhost:3001/api/get_balance/63ec453886139528d674a584`
+    `https://payscale-backend.onrender.com/api/get_balance/650370fef9a50d68f703064e`
   );
   const total_balance = await balance.json();
   return {

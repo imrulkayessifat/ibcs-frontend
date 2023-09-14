@@ -52,7 +52,7 @@ const EmployeeModal = ({
         body: JSON.stringify(values),
       };
       const res = await fetch(
-        `http://localhost:3001/api/send/${details?.uniqueId}`,
+        `https://payscale-backend.onrender.com/api/send/${details?.uniqueId}`,
         requestOptions
       );
       const data = await res.json();
@@ -63,7 +63,7 @@ const EmployeeModal = ({
         body: JSON.stringify(details),
       };
       const resRank = await fetch(
-        `http://localhost:3001/api/update/${details?.uniqueId}`,
+        `https://payscale-backend.onrender.com/api/update/${details?.uniqueId}`,
         requestOptionsRank
       );
       const dataRank = await resRank.json();
@@ -76,7 +76,7 @@ const EmployeeModal = ({
         body: JSON.stringify(balance),
       };
       const resBalance = await fetch(
-        `http://localhost:3001/api/update_balance/63ec453886139528d674a584`,
+        `https://payscale-backend.onrender.com/api/update_balance/650370fef9a50d68f703064e`,
         requestOptionsBalance
       );
       const dataBalance = await resBalance.json();

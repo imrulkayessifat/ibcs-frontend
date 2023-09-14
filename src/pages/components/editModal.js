@@ -30,11 +30,11 @@ const EditModal = ({ setShowModal, updateData, setStatePost }) => {
       body: JSON.stringify(values),
     };
     const res = await fetch(
-      `http://localhost:3001/api/update/${updateData?.uniqueId}`,
+      `https://payscale-backend.onrender.com/api/update/${updateData?.uniqueId}`,
       requestOptions
     );
     const data = await res.json();
-    const posts1 = await fetch(`http://localhost:3001/api/getAll`);
+    const posts1 = await fetch(`https://payscale-backend.onrender.com/api/getAll`);
     const dataPost1 = await posts1.json();
     setStatePost(dataPost1);
     setShowModal(false);

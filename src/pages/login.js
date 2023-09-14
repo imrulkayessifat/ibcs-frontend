@@ -24,7 +24,7 @@ const Login = () => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(values),
     };
-    const res = await fetch(`http://localhost:3001/api/login`, requestOptions);
+    const res = await fetch(`https://payscale-backend.onrender.com/api/login`, requestOptions);
     const data = await res.json();
     if (data?.success) {
       setToken(data?.token);

@@ -16,10 +16,10 @@ const Modal = ({ setShowModal,setStatePost }) => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(values),
     };
-    const res = await fetch(`http://localhost:3001/api/post`, requestOptions);
+    const res = await fetch(`https://payscale-backend.onrender.com/api/post`, requestOptions);
     const data = await res.json();
 
-    const posts1 = await fetch(`http://localhost:3001/api/getAll`);
+    const posts1 = await fetch(`https://payscale-backend.onrender.com/api/getAll`);
     const dataPost1 = await posts1.json();
     setStatePost(dataPost1)
 

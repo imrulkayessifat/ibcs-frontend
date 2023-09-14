@@ -24,22 +24,22 @@ const Info = ({ inputs, setStatePost, total_bank_balance }) => {
   const [pdfSingleData, setPdfSingleData] = useState();
 
   const singleData = async (id) => {
-    const res = await fetch(`http://localhost:3001/api/getOne/${id}`);
+    const res = await fetch(`https://payscale-backend.onrender.com/api/getOne/${id}`);
     const data = await res.json();
     setUpdateData(data);
     const resAccount = await fetch(
-      `http://localhost:3001/api/getSingleAccount/${id}`
+      `https://payscale-backend.onrender.com/api/getSingleAccount/${id}`
     );
     const dataAccount = await resAccount.json();
     setAccountData(dataAccount);
   };
 
   const pdfData = async (id) => {
-    const res = await fetch(`http://localhost:3001/api/getOne/${id}`);
+    const res = await fetch(`https://payscale-backend.onrender.com/api/getOne/${id}`);
     const data = await res.json();
 
     const resAccount = await fetch(
-      `http://localhost:3001/api/getSingleAccount/${id}`
+      `https://payscale-backend.onrender.com/api/getSingleAccount/${id}`
     );
     const dataAccount = await resAccount.json();
     generatePDF(data, dataAccount[dataAccount.length - 1]);
@@ -47,10 +47,10 @@ const Info = ({ inputs, setStatePost, total_bank_balance }) => {
   };
 
   const handleDelete = async (id) => {
-    const res = await fetch(`http://localhost:3001/api/delete/${id}`, {
+    const res = await fetch(`https://payscale-backend.onrender.com/api/delete/${id}`, {
       method: "DELETE",
     });
-    const posts1 = await fetch(`http://localhost:3001/api/getAll`);
+    const posts1 = await fetch(`https://payscale-backend.onrender.com/api/getAll`);
     const dataPost1 = await posts1.json();
     setStatePost(dataPost1);
   };

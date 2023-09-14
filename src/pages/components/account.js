@@ -14,7 +14,7 @@ const Account = ({ total_bank_balance, setBankBalance, bankBalance }) => {
       body: JSON.stringify(values),
     };
     const res = await fetch(
-      `http://localhost:3001/api/update_balance/63ec453886139528d674a584`,
+      `https://payscale-backend.onrender.com/api/update_balance/650370fef9a50d68f703064e`,
       requestOptions
     );
     const data = await res.json();
